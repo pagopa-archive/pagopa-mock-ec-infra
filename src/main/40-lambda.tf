@@ -4,8 +4,21 @@
 resource "aws_s3_bucket" "lambda_bucket_temporaney" {
   bucket = "mock-ec-${var.env_short}"
 
-  acl           = "private"
   force_destroy = true
+}
+
+resource "aws_s3_bucket_acl" "lambda_bucket_temporaney" {
+  bucket = aws_s3_bucket.lambda_bucket_temporaney.id
+  acl    = "private"
+}
+
+
+resource "aws_s3_bucket_public_access_block" "lambda_bucket_temporaney" {
+  bucket                  = aws_s3_bucket.lambda_bucket_temporaney.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 data "archive_file" "lambda_mock_archive_file" {
