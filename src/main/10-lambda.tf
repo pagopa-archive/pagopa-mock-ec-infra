@@ -62,7 +62,7 @@ resource "aws_lambda_function_url" "mock_ec_latest" {
 resource "aws_cloudwatch_log_group" "mock_ec" {
   name = "/aws/lambda/${aws_lambda_function.mock_ec.function_name}"
 
-  retention_in_days = 30
+  retention_in_days = var.lambda_log_retention
 }
 
 resource "aws_iam_role" "lambda_exec" {

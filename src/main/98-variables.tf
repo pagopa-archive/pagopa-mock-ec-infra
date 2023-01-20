@@ -22,6 +22,12 @@ variable "env_short" {
   description = "Evnironment short."
 }
 
+variable "lambda_log_retention" {
+  type        = number
+  default     = 30
+  description = "Log retention"
+}
+
 variable "tags" {
   type = map(any)
   default = {
